@@ -12,6 +12,8 @@ process prepareData {
 
     script:
     """
+    echo \$PATH
+    ls -l /workspace/work
     prepare_data.py --input $_data --train data/train.csv --val data/val.csv --test data/test.csv
     """
 }
