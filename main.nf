@@ -81,8 +81,8 @@ process evaluateTuningResults {
 }
 
 workflow {
-    _data = Channel.fromPath(params.input_file)
-    _modeloutputs = Channel.fromPath('models/')
+    _data = Channel.fromPath("${projectDir}/${params.input_file}")
+    _modeloutputs = Channel.fromPath("${projectDir}/models/")
 
     prepareData(_data)
     trainInitialModel(prepareData.out.train, prepareData.out.val)
