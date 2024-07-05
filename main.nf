@@ -12,7 +12,7 @@ process prepareData {
 
     script:
     """
-    python3 $projectDir/prepare_data.py --input $_data --train data/train.csv --val data/val.csv --test data/test.csv
+    prepare_data.py --input $_data --train data/train.csv --val data/val.csv --test data/test.csv
     """
 }
 
