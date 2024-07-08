@@ -1,6 +1,7 @@
 nextflow.enable.dsl=2
 
 process prepareData {
+    conda 'environment.yml'
     tag 'prepare-data'
     input:
     path _data
@@ -12,12 +13,12 @@ process prepareData {
 
     script:
     """
-    pip install -r $projectDir/requirements.txt
-    prepare_data.py --input $_data --train data/train.csv --val data/val.csv --test data/test.csv
+    python3 $projectDir/prepare_data.py --input $_data --train data/train.csv --val data/val.csv --test data/test.csv
     """
 }
 
 process trainInitialModel {
+    conda 'environment.yml'
     tag 'train-initial-model'
 	queue = 'hpc'
     input:
@@ -35,6 +36,7 @@ process trainInitialModel {
 }
 
 process evaluateInitialModel {
+    conda 'environment.yml'
     tag 'evaluate-initial-model'
     input:
     path initialmodel
@@ -50,6 +52,7 @@ process evaluateInitialModel {
 }
 
 process hyperparameterTuning {
+    conda 'environment.yml'
     tag 'hyperparameter-tuning'
     input:
     path train
@@ -67,6 +70,7 @@ process hyperparameterTuning {
 }
 
 process evaluateTuningResults {
+    conda 'environment.yml'
     tag 'evaluate-tuning-results'
     input:
 	val ready
