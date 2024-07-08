@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
 
-def prepare_data(input_file, train_file, val_file, test_file):
-    # df = pd.read_csv(input_file)
-    # train_val, test = train_test_split(df, test_size=0.2, random_state=42)
-    # train, val = train_test_split(train_val, test_size=0.2, random_state=42)
-    
-    # _cwd = os.getcwd()
-    # newdir = os.path.join(_cwd, r'data')
-    # if not os.path.exists(newdir):
-    #    os.makedirs(newdir)
+import os
+import pandas as pd
+from sklearn.model_selection import train_test_split
 
-    # train.to_csv(train_file, index=False)
-    # val.to_csv(val_file, index=False)
-    # test.to_csv(test_file, index=False)
-    print('Hello, world!')
-    print(input_file)
-    print(train_file)
-    print(val_file)
-    print(test_file)
+def prepare_data(input_file, train_file, val_file, test_file):
+    df = pd.read_csv(input_file)
+    train_val, test = train_test_split(df, test_size=0.2, random_state=42)
+    train, val = train_test_split(train_val, test_size=0.2, random_state=42)
+    
+    _cwd = os.getcwd()
+    newdir = os.path.join(_cwd, r'data')
+    if not os.path.exists(newdir):
+       os.makedirs(newdir)
+
+    train.to_csv(train_file, index=False)
+    val.to_csv(val_file, index=False)
+    test.to_csv(test_file, index=False)
 
 if __name__ == '__main__':
     import argparse
