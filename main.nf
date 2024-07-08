@@ -13,8 +13,13 @@ process prepareData {
 
     script:
     """
+    echo "Starting pip install"
     pip install --target=/workspace/python_modules -r $projectDir/requirements.txt
+    echo "Pip install completed"
+    echo "PYTHONPATH set to: \$PYTHONPATH"
+    echo "Starting Python script"
     python3 $projectDir/prepare_data.py --input $_data --train data/train.csv --val data/val.csv --test data/test.csv
+    echo "Python script completed"
     """
 }
 
