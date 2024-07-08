@@ -13,6 +13,8 @@ process prepareData {
     script:
     """
     echo \$PATH
+    which python3
+    ls -l /workspace/projects/dereknfernandez/nf-hpc/bin
     prepare_data.py --input $_data --train $projectDir/data/train.csv --val $projectDir/data/val.csv --test data/test.csv
     """
 }
