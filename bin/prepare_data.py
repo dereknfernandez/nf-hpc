@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 
-import os
-import pandas as pd
-from sklearn.model_selection import train_test_split
-
 def prepare_data(input_file, train_file, val_file, test_file):
     # df = pd.read_csv(input_file)
     # train_val, test = train_test_split(df, test_size=0.2, random_state=42)
