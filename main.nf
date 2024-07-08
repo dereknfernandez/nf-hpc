@@ -13,7 +13,7 @@ process prepareData {
 
     script:
     """
-    pip install -r $projectDir/requirements.txt
+    pip install --target=/workspace/python_modules -r requirements.txt
     python3 $projectDir/prepare_data.py --input $_data --train data/train.csv --val data/val.csv --test data/test.csv
     """
 }
