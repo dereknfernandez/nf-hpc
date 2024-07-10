@@ -12,7 +12,6 @@ process prepareData {
 
     script:
     """
-    pip install -r $projectDir/requirements.txt
     python3 $projectDir/prepare_data.py --input $_data --train data/train.csv --val data/val.csv --test data/test.csv
     """
 }
@@ -30,7 +29,6 @@ process trainInitialModel {
 
     script:
     """
-    pip install -r $projectDir/requirements.txt
     python3 $projectDir/train.py --train $train --val $val --params '{}' --output models/initial_model.pkl
     """
 }
@@ -46,7 +44,6 @@ process evaluateInitialModel {
 
     script:
     """
-    pip install -r $projectDir/requirements.txt
     python3 $projectDir/evaluate.py --model $initialmodel --input $test --output models/initial_evaluation.txt
     """
 }
@@ -64,7 +61,6 @@ process hyperparameterTuning {
 
     script:
     """
-    pip install -r $projectDir/requirements.txt
     python3 $projectDir/train.py --train $train --val $val --params '${param.replaceAll(/'/, "\\'")}' --output models/model_${param.replaceAll(/[^a-zA-Z0-9]/, '_')}.pkl
     """
 }
@@ -79,7 +75,6 @@ process evaluateTuningResults {
 
     script:
     """
-    pip install -r $projectDir/requirements.txt
     python3 $projectDir/evaluate_tuning.py --results_dir $projectDir/models --output models/best_model_params.txt
     """
 }
