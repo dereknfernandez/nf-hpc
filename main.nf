@@ -73,7 +73,6 @@ process evaluateTuningResults {
     tag 'evaluate-tuning-results'
     input:
 	val ready
-    path _modeloutputs
 
     output:
     path 'models/best_model_params.txt'
@@ -81,17 +80,16 @@ process evaluateTuningResults {
     script:
     """
     pip install -r $projectDir/requirements.txt
-    python3 $projectDir/evaluate_tuning.py --results_dir $_modeloutputs --output models/best_model_params.txt
+    python3 $projectDir/evaluate_tuning.py --results_dir $projectDir/models --output models/best_model_params.txt
     """
 }
 
 workflow {
     _data = Channel.fromPath("${projectDir}/${params.input_file}")
-    _modeloutputs = Channel.fromPath("models/")
 
     prepareData(_data)
     trainInitialModel(prepareData.out.train, prepareData.out.val)
     evaluateInitialModel(trainInitialModel.out.initialmodel, prepareData.out.test)
 	hyperparameterTuning(prepareData.out.train, prepareData.out.val, params.hyperparams)
-    evaluateTuningResults(hyperparameterTuning.out.results, _modeloutputs)
+    evaluateTuningResults(hyperparameterTuning.out.results)
 }
