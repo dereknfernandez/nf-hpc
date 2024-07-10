@@ -17,6 +17,11 @@ def evaluate_tuning(results_dir, output_file):
                 best_score = f1_score
                 best_params = file.split('_results.txt')[0].split('model_')[1]
 
+    _cwd = os.getcwd()
+    newdir = os.path.join(_cwd, r'models')
+    if not os.path.exists(newdir):
+       os.makedirs(newdir)
+
     with open(output_file, 'w') as f:
         f.write(f'Best Params: {best_params}\n')
         f.write(f'Best F1 Score: {best_score}\n')
