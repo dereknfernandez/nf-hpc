@@ -1,0 +1,7 @@
+name: nf-hpc-env
+channels:
+  - defaults
+dependencies:
+  - pandas
+  - scikit-learn
+  - joblib
